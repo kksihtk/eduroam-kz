@@ -13,6 +13,59 @@ const LANGUAGES = {
 const DEFAULT_LANG = 'ru'
 const VALID_LANGS = Object.keys(LANGUAGES)
 
+const ORGANIZATION_LINKS = {
+  satbayev: {
+    url: 'https://official.satbayev.university/',
+    domain: 'official.satbayev.university',
+    initials: 'SU',
+  },
+  turan: {
+    url: 'https://turan.edu.kz/',
+    domain: 'turan.edu.kz',
+    initials: 'TU',
+  },
+  'turan-astana': {
+    url: 'https://tau-edu.kz/',
+    domain: 'tau-edu.kz',
+    initials: 'TAU',
+  },
+  coventry: {
+    url: 'https://coventry.edu.kz/',
+    domain: 'coventry.edu.kz',
+    initials: 'CU',
+  },
+  atyrau: {
+    url: 'https://asu.edu.kz/',
+    domain: 'asu.edu.kz',
+    initials: 'AU',
+  },
+  iitu: {
+    url: 'https://iitu.edu.kz/',
+    domain: 'iitu.edu.kz',
+    initials: 'IITU',
+  },
+  zhubanov: {
+    url: 'https://zhubanov.edu.kz/',
+    domain: 'zhubanov.edu.kz',
+    initials: 'ZU',
+  },
+  'nur-mubarak': {
+    url: 'https://nmu.edu.kz/',
+    domain: 'nmu.edu.kz',
+    initials: 'NMU',
+  },
+  metu: {
+    url: 'https://metu.edu.kz/',
+    domain: 'metu.edu.kz',
+    initials: 'METU',
+  },
+  sdu: {
+    url: 'https://sdu.edu.kz/',
+    domain: 'sdu.edu.kz',
+    initials: 'SDU',
+  },
+}
+
 const CONTENT = {
   ru: {
     nav: { home: 'Главная', organizations: 'Организации' },
@@ -97,7 +150,7 @@ const CONTENT = {
     organizations: [
       {
         id: 'satbayev',
-        name: 'Satbayev University',
+        name: 'Satpaev University',
         city: 'Алматы',
         status: 'connected',
         audience: 'студенты, преподаватели, исследователи',
@@ -110,52 +163,142 @@ const CONTENT = {
         audience: 'обучающиеся и сотрудники университета',
       },
       {
-        id: 'sdu',
-        name: 'Университет имени Сулеймана Демиреля',
-        city: 'Каскелен',
+        id: 'turan-astana',
+        name: 'Turan - Astana University',
+        city: 'Астана',
         status: 'connected',
-        audience: 'академическое сообщество SDU',
+        audience: 'студенты, преподаватели и сотрудники',
+      },
+      {
+        id: 'coventry',
+        name: 'Coventry University Kazakhstan',
+        city: 'Астана',
+        status: 'connected',
+        audience: 'студенты, преподаватели и сотрудники',
+      },
+      {
+        id: 'atyrau',
+        name: 'Kh. Dosmukhamedov Atyrau University',
+        city: 'Атырау',
+        status: 'connected',
+        audience: 'студенты, преподаватели и исследователи',
       },
       {
         id: 'iitu',
-        name: 'International Information Technology University',
+        name: 'International Information Technologies University',
         city: 'Алматы',
-        status: 'announced',
+        status: 'connected',
         audience: 'студенты, профессорско-преподавательский состав и персонал',
+      },
+      {
+        id: 'zhubanov',
+        name: 'K.Zhubanov Aktobe regional University',
+        city: 'Актобе',
+        status: 'connected',
+        audience: 'студенты, преподаватели и сотрудники',
+      },
+      {
+        id: 'nur-mubarak',
+        name: 'Egyptian University of Islamic Culture Nur-Mubarak',
+        city: 'Алматы',
+        status: 'connected',
+        audience: 'студенты, преподаватели и сотрудники',
+      },
+      {
+        id: 'metu',
+        name: 'International Engineering and Technological University',
+        city: 'Алматы',
+        status: 'connected',
+        audience: 'студенты, преподаватели и сотрудники',
+      },
+      {
+        id: 'sdu',
+        name: 'Suleyman Demirel University',
+        city: 'Каскелен',
+        status: 'connected',
+        audience: 'академическое сообщество SDU',
       },
     ],
     hotspots: [
       {
         id: 'satbayev',
-        name: 'Satbayev University',
+        name: 'Satpaev University',
         city: 'Алматы',
-        address: 'ул. Сатпаева, кампус Satbayev University',
-        coordinates: [43.2367, 76.9293],
+        address: 'ул. Сатпаева, 22',
+        coordinates: [43.2360197, 76.9202422],
         status: 'activeHotspot',
       },
       {
         id: 'turan',
         name: 'Университет «Туран»',
         city: 'Алматы',
-        address: 'ул. Сатпаева, кампус университета',
-        coordinates: [43.2361, 76.9314],
+        address: 'ул. Сатпаева, 16А, кампус университета',
+        coordinates: [43.2374, 76.9404],
         status: 'activeHotspot',
       },
       {
-        id: 'sdu',
-        name: 'Университет имени Сулеймана Демиреля',
-        city: 'Каскелен',
-        address: 'кампус SDU University',
-        coordinates: [43.2077, 76.6691],
+        id: 'turan-astana',
+        name: 'Turan - Astana University',
+        city: 'Астана',
+        address: 'ул. Дүкенұлы, 29',
+        coordinates: [51.1815679, 71.43244],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'coventry',
+        name: 'Coventry University Kazakhstan',
+        city: 'Астана',
+        address: 'Коргалжынское шоссе, 13А',
+        coordinates: [51.1489885, 71.3554127],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'atyrau',
+        name: 'Kh. Dosmukhamedov Atyrau University',
+        city: 'Атырау',
+        address: 'Студенческий проспект, 1',
+        coordinates: [47.1012483, 51.9136422],
         status: 'activeHotspot',
       },
       {
         id: 'iitu',
-        name: 'International Information Technology University',
+        name: 'International Information Technologies University',
         city: 'Алматы',
-        address: 'ул. Манаса, кампус IITU',
-        coordinates: [43.2354, 76.9093],
-        status: 'announced',
+        address: 'ул. Манаса, 34/1',
+        coordinates: [43.23517, 76.90978],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'zhubanov',
+        name: 'K.Zhubanov Aktobe regional University',
+        city: 'Актобе',
+        address: 'пр. Алии Молдагуловой, 34',
+        coordinates: [50.2890898, 57.1536497],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'nur-mubarak',
+        name: 'Egyptian University of Islamic Culture Nur-Mubarak',
+        city: 'Алматы',
+        address: 'пр. Аль-Фараби, 73',
+        coordinates: [43.2123327, 76.9178057],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'metu',
+        name: 'International Engineering and Technological University',
+        city: 'Алматы',
+        address: 'пр. Аль-Фараби, 93Г/5',
+        coordinates: [43.2283977, 76.9554344],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'sdu',
+        name: 'Suleyman Demirel University',
+        city: 'Каскелен',
+        address: 'пр. Абылай хана, 1/1',
+        coordinates: [43.2075546, 76.6696884],
+        status: 'activeHotspot',
       },
     ],
     footer: 'eduroam Kazakhstan, координация сервиса KazRENA',
@@ -243,7 +386,7 @@ const CONTENT = {
     organizations: [
       {
         id: 'satbayev',
-        name: 'Satbayev University',
+        name: 'Satpaev University',
         city: 'Алматы',
         status: 'connected',
         audience: 'студенттер, оқытушылар, зерттеушілер',
@@ -256,52 +399,142 @@ const CONTENT = {
         audience: 'университет білім алушылары мен қызметкерлері',
       },
       {
-        id: 'sdu',
-        name: 'Сүлейман Демирел атындағы университет',
-        city: 'Қаскелең',
+        id: 'turan-astana',
+        name: 'Turan - Astana University',
+        city: 'Астана',
         status: 'connected',
-        audience: 'SDU академиялық қауымдастығы',
+        audience: 'студенттер, оқытушылар және қызметкерлер',
+      },
+      {
+        id: 'coventry',
+        name: 'Coventry University Kazakhstan',
+        city: 'Астана',
+        status: 'connected',
+        audience: 'студенттер, оқытушылар және қызметкерлер',
+      },
+      {
+        id: 'atyrau',
+        name: 'Х. Досмұхамедов атындағы Атырау университеті',
+        city: 'Атырау',
+        status: 'connected',
+        audience: 'студенттер, оқытушылар және зерттеушілер',
       },
       {
         id: 'iitu',
-        name: 'International Information Technology University',
+        name: 'Халықаралық ақпараттық технологиялар университеті',
         city: 'Алматы',
-        status: 'announced',
+        status: 'connected',
         audience: 'студенттер, профессор-оқытушылар құрамы және персонал',
+      },
+      {
+        id: 'zhubanov',
+        name: 'Қ. Жұбанов атындағы Ақтөбе өңірлік университеті',
+        city: 'Ақтөбе',
+        status: 'connected',
+        audience: 'студенттер, оқытушылар және қызметкерлер',
+      },
+      {
+        id: 'nur-mubarak',
+        name: 'Нұр-Мүбарак Египет ислам мәдениеті университеті',
+        city: 'Алматы',
+        status: 'connected',
+        audience: 'студенттер, оқытушылар және қызметкерлер',
+      },
+      {
+        id: 'metu',
+        name: 'Халықаралық инженерлік-технологиялық университеті',
+        city: 'Алматы',
+        status: 'connected',
+        audience: 'студенттер, оқытушылар және қызметкерлер',
+      },
+      {
+        id: 'sdu',
+        name: 'Suleyman Demirel University',
+        city: 'Қаскелең',
+        status: 'connected',
+        audience: 'SDU академиялық қауымдастығы',
       },
     ],
     hotspots: [
       {
         id: 'satbayev',
-        name: 'Satbayev University',
+        name: 'Satpaev University',
         city: 'Алматы',
-        address: 'Сәтпаев к-сі, Satbayev University кампусы',
-        coordinates: [43.2367, 76.9293],
+        address: 'Сәтпаев к-сі, 22',
+        coordinates: [43.2360197, 76.9202422],
         status: 'activeHotspot',
       },
       {
         id: 'turan',
         name: '«Тұран» университеті',
         city: 'Алматы',
-        address: 'Сәтпаев к-сі, университет кампусы',
-        coordinates: [43.2361, 76.9314],
+        address: 'Сәтпаев к-сі, 16А, университет кампусы',
+        coordinates: [43.2374, 76.9404],
         status: 'activeHotspot',
       },
       {
-        id: 'sdu',
-        name: 'Сүлейман Демирел атындағы университет',
-        city: 'Қаскелең',
-        address: 'SDU University кампусы',
-        coordinates: [43.2077, 76.6691],
+        id: 'turan-astana',
+        name: 'Turan - Astana University',
+        city: 'Астана',
+        address: 'Дүкенұлы к-сі, 29',
+        coordinates: [51.1815679, 71.43244],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'coventry',
+        name: 'Coventry University Kazakhstan',
+        city: 'Астана',
+        address: 'Қорғалжын тас жолы, 13А',
+        coordinates: [51.1489885, 71.3554127],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'atyrau',
+        name: 'Х. Досмұхамедов атындағы Атырау университеті',
+        city: 'Атырау',
+        address: 'Студенттер даңғылы, 1',
+        coordinates: [47.1012483, 51.9136422],
         status: 'activeHotspot',
       },
       {
         id: 'iitu',
-        name: 'International Information Technology University',
+        name: 'Халықаралық ақпараттық технологиялар университеті',
         city: 'Алматы',
-        address: 'Манас к-сі, IITU кампусы',
-        coordinates: [43.2354, 76.9093],
-        status: 'announced',
+        address: 'Манас к-сі, 34/1',
+        coordinates: [43.23517, 76.90978],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'zhubanov',
+        name: 'Қ. Жұбанов атындағы Ақтөбе өңірлік университеті',
+        city: 'Ақтөбе',
+        address: 'Әлия Молдағұлова даңғылы, 34',
+        coordinates: [50.2890898, 57.1536497],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'nur-mubarak',
+        name: 'Нұр-Мүбарак Египет ислам мәдениеті университеті',
+        city: 'Алматы',
+        address: 'Әл-Фараби даңғылы, 73',
+        coordinates: [43.2123327, 76.9178057],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'metu',
+        name: 'Халықаралық инженерлік-технологиялық университеті',
+        city: 'Алматы',
+        address: 'Әл-Фараби даңғылы, 93Г/5',
+        coordinates: [43.2283977, 76.9554344],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'sdu',
+        name: 'Suleyman Demirel University',
+        city: 'Қаскелең',
+        address: 'Абылай хан даңғылы, 1/1',
+        coordinates: [43.2075546, 76.6696884],
+        status: 'activeHotspot',
       },
     ],
     footer: 'eduroam Kazakhstan, KazRENA сервисінің үйлестіруі',
@@ -389,7 +622,7 @@ const CONTENT = {
     organizations: [
       {
         id: 'satbayev',
-        name: 'Satbayev University',
+        name: 'Satpaev University',
         city: 'Almaty',
         status: 'connected',
         audience: 'students, teachers, researchers',
@@ -402,52 +635,142 @@ const CONTENT = {
         audience: 'students and university staff',
       },
       {
+        id: 'turan-astana',
+        name: 'Turan - Astana University',
+        city: 'Astana',
+        status: 'connected',
+        audience: 'students, faculty and staff',
+      },
+      {
+        id: 'coventry',
+        name: 'Coventry University Kazakhstan',
+        city: 'Astana',
+        status: 'connected',
+        audience: 'students, faculty and staff',
+      },
+      {
+        id: 'atyrau',
+        name: 'Kh. Dosmukhamedov Atyrau University',
+        city: 'Atyrau',
+        status: 'connected',
+        audience: 'students, faculty and researchers',
+      },
+      {
+        id: 'iitu',
+        name: 'International Information Technologies University',
+        city: 'Almaty',
+        status: 'connected',
+        audience: 'students, faculty and staff',
+      },
+      {
+        id: 'zhubanov',
+        name: 'K.Zhubanov Aktobe regional University',
+        city: 'Aktobe',
+        status: 'connected',
+        audience: 'students, faculty and staff',
+      },
+      {
+        id: 'nur-mubarak',
+        name: 'Egyptian University of Islamic Culture Nur-Mubarak',
+        city: 'Almaty',
+        status: 'connected',
+        audience: 'students, faculty and staff',
+      },
+      {
+        id: 'metu',
+        name: 'International Engineering and Technological University',
+        city: 'Almaty',
+        status: 'connected',
+        audience: 'students, faculty and staff',
+      },
+      {
         id: 'sdu',
         name: 'Suleyman Demirel University',
         city: 'Kaskelen',
         status: 'connected',
         audience: 'SDU academic community',
       },
-      {
-        id: 'iitu',
-        name: 'International Information Technology University',
-        city: 'Almaty',
-        status: 'announced',
-        audience: 'students, faculty and staff',
-      },
     ],
     hotspots: [
       {
         id: 'satbayev',
-        name: 'Satbayev University',
+        name: 'Satpaev University',
         city: 'Almaty',
-        address: 'Satpayev St., Satbayev University campus',
-        coordinates: [43.2367, 76.9293],
+        address: 'Satpayev St. 22',
+        coordinates: [43.2360197, 76.9202422],
         status: 'activeHotspot',
       },
       {
         id: 'turan',
         name: 'Turan University',
         city: 'Almaty',
-        address: 'Satpayev St., university campus',
-        coordinates: [43.2361, 76.9314],
+        address: 'Satpayev St. 16A, university campus',
+        coordinates: [43.2374, 76.9404],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'turan-astana',
+        name: 'Turan - Astana University',
+        city: 'Astana',
+        address: 'Dukenuly St. 29',
+        coordinates: [51.1815679, 71.43244],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'coventry',
+        name: 'Coventry University Kazakhstan',
+        city: 'Astana',
+        address: 'Korgalzhyn Highway 13A',
+        coordinates: [51.1489885, 71.3554127],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'atyrau',
+        name: 'Kh. Dosmukhamedov Atyrau University',
+        city: 'Atyrau',
+        address: 'Studenchesky Ave. 1',
+        coordinates: [47.1012483, 51.9136422],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'iitu',
+        name: 'International Information Technologies University',
+        city: 'Almaty',
+        address: 'Manas St. 34/1',
+        coordinates: [43.23517, 76.90978],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'zhubanov',
+        name: 'K.Zhubanov Aktobe regional University',
+        city: 'Aktobe',
+        address: 'A. Moldagulova Ave. 34',
+        coordinates: [50.2890898, 57.1536497],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'nur-mubarak',
+        name: 'Egyptian University of Islamic Culture Nur-Mubarak',
+        city: 'Almaty',
+        address: 'Al-Farabi Ave. 73',
+        coordinates: [43.2123327, 76.9178057],
+        status: 'activeHotspot',
+      },
+      {
+        id: 'metu',
+        name: 'International Engineering and Technological University',
+        city: 'Almaty',
+        address: 'Al-Farabi Ave. 93G/5',
+        coordinates: [43.2283977, 76.9554344],
         status: 'activeHotspot',
       },
       {
         id: 'sdu',
         name: 'Suleyman Demirel University',
         city: 'Kaskelen',
-        address: 'SDU University campus',
-        coordinates: [43.2077, 76.6691],
+        address: 'Abylay Khan Ave. 1/1',
+        coordinates: [43.2075546, 76.6696884],
         status: 'activeHotspot',
-      },
-      {
-        id: 'iitu',
-        name: 'International Information Technology University',
-        city: 'Almaty',
-        address: 'Manas St., IITU campus',
-        coordinates: [43.2354, 76.9093],
-        status: 'announced',
       },
     ],
     footer: 'eduroam Kazakhstan, service coordination by KazRENA',
@@ -647,6 +970,14 @@ function HotspotMap({ t }) {
 
       return marker
     })
+
+    const bounds = L.latLngBounds(
+      t.hotspots.map((hotspot) => hotspot.coordinates),
+    )
+    map.fitBounds(bounds, {
+      padding: [42, 42],
+      maxZoom: 6,
+    })
   }, [t])
 
   const focusHotspot = (hotspot) => {
@@ -698,6 +1029,60 @@ function HotspotMap({ t }) {
         </div>
       </div>
     </section>
+  )
+}
+
+function OrganizationLogoStrip({ t }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <>
+      <div
+        className={`organization-ribbon ${isExpanded ? 'expanded' : ''}`}
+        data-reveal
+      >
+        {t.organizations.map((organization, index) => {
+          const link = ORGANIZATION_LINKS[organization.id]
+          const logoUrl = `https://www.google.com/s2/favicons?domain=${link.domain}&sz=128`
+
+          return (
+            <a
+              className={`organization-logo-card ${
+                index >= 4 ? 'mobile-collapsible' : ''
+              }`}
+              href={link.url}
+              key={organization.id}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span className="organization-logo">
+                <img
+                  alt=""
+                  src={logoUrl}
+                  onError={(event) => {
+                    event.currentTarget.style.display = 'none'
+                  }}
+                />
+                <span>{link.initials}</span>
+              </span>
+              <strong>{organization.name}</strong>
+              <small>{organization.city}</small>
+            </a>
+          )
+        })}
+      </div>
+      <button
+        className={`organization-toggle ${isExpanded ? 'expanded' : ''}`}
+        type="button"
+        onClick={() => setIsExpanded((current) => !current)}
+        aria-expanded={isExpanded}
+      >
+        <span>{isExpanded ? 'Свернуть' : 'Показать все'}</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+    </>
   )
 }
 
@@ -841,31 +1226,7 @@ function Organizations({ t }) {
             <p className="eyebrow">{t.organizationsPage.directoryEyebrow}</p>
             <h2>{t.organizationsPage.directoryTitle}</h2>
           </div>
-          <div className="table-shell" data-reveal>
-            <table>
-              <thead>
-                <tr>
-                  {t.organizationsPage.table.map((heading) => (
-                    <th key={heading}>{heading}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {t.organizations.map((organization) => (
-                  <tr key={organization.id}>
-                    <td>{organization.name}</td>
-                    <td>{organization.city}</td>
-                    <td>
-                      <span className="status-pill">
-                        {t.statuses[organization.status]}
-                      </span>
-                    </td>
-                    <td>{organization.audience}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <OrganizationLogoStrip t={t} />
         </div>
       </section>
 

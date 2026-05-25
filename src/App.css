@@ -453,6 +453,116 @@ td,
   overflow-x: auto;
 }
 
+.organization-ribbon {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin-top: 30px;
+}
+
+.organization-logo-card {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink);
+  display: grid;
+  gap: 10px;
+  min-height: 190px;
+  padding: 22px 18px;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.organization-logo-card:hover {
+  border-color: rgba(12, 103, 178, 0.32);
+  box-shadow: 0 18px 46px rgba(12, 103, 178, 0.12);
+  transform: translateY(-3px);
+}
+
+.organization-logo {
+  align-items: center;
+  background: var(--soft-blue);
+  border: 1px solid rgba(12, 103, 178, 0.1);
+  border-radius: 8px;
+  display: grid;
+  height: 72px;
+  justify-self: center;
+  overflow: hidden;
+  place-items: center;
+  position: relative;
+  width: 72px;
+}
+
+.organization-logo img {
+  background: #fff;
+  border-radius: 8px;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.organization-logo span {
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0;
+  position: absolute;
+}
+
+.organization-logo-card strong {
+  align-self: end;
+  font-size: 17px;
+  line-height: 1.22;
+}
+
+.organization-logo-card small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.organization-toggle {
+  align-items: center;
+  background: var(--soft-blue);
+  border: 1px solid rgba(12, 103, 178, 0.12);
+  border-radius: 8px;
+  color: var(--blue);
+  cursor: pointer;
+  display: none;
+  font: inherit;
+  font-weight: 800;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+  min-height: 46px;
+  padding: 10px 16px;
+  width: 100%;
+}
+
+.organization-toggle svg {
+  fill: none;
+  height: 20px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+  transition: transform 180ms ease;
+  width: 20px;
+}
+
+.organization-toggle.expanded svg {
+  transform: rotate(180deg);
+}
+
 .map-layout {
   align-items: stretch;
   display: grid;
@@ -512,10 +622,12 @@ td,
 .hotspot-panel {
   display: flex;
   flex-direction: column;
+  height: 560px;
   min-height: 560px;
 }
 
 .selected-hotspot {
+  flex: 0 0 auto;
   background: var(--blue-dark);
   color: #fff;
   padding: 28px;
@@ -545,6 +657,8 @@ td,
 .hotspot-list {
   display: grid;
   gap: 0;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: auto;
 }
 
@@ -814,11 +928,19 @@ address span {
   }
 
   .hotspot-panel {
-    min-height: auto;
+    display: none;
   }
 
   .leaflet-map {
     height: 440px;
+  }
+
+  .organization-toggle {
+    display: inline-flex;
+  }
+
+  .organization-ribbon:not(.expanded) .mobile-collapsible {
+    display: none;
   }
 
   .hero-section {
