@@ -14,9 +14,14 @@
 
 .brand {
   align-items: center;
+  background: transparent;
+  border: 0;
   color: var(--ink);
+  cursor: pointer;
   display: inline-flex;
   gap: 14px;
+  font: inherit;
+  padding: 0;
   text-decoration: none;
 }
 
@@ -37,13 +42,21 @@
   white-space: nowrap;
 }
 
-.site-nav {
+.header-controls {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+}
+
+.site-nav,
+.language-switcher {
   align-items: center;
   display: flex;
   gap: 8px;
 }
 
 .site-nav button,
+.language-switcher button,
 .hero-actions a,
 .hero-actions button,
 .text-action {
@@ -61,8 +74,22 @@
   padding: 10px 14px;
 }
 
+.language-switcher {
+  border-left: 1px solid var(--border);
+  padding-left: 18px;
+}
+
+.language-switcher button {
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 8px 10px;
+}
+
 .site-nav button.active,
-.site-nav button:hover {
+.site-nav button:hover,
+.language-switcher button.active,
+.language-switcher button:hover {
   background: var(--soft-blue);
   color: var(--blue);
 }
@@ -744,7 +771,24 @@ address span {
     width: 100%;
   }
 
+  .header-controls {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
   .site-nav button {
+    flex: 1;
+  }
+
+  .language-switcher {
+    border-left: 0;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .language-switcher button {
     flex: 1;
   }
 
