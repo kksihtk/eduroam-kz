@@ -1,4 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import eduroamLogo from './assets/eduroam-logo.svg'
 import './App.css'
 
 const organizations = [
@@ -28,6 +31,37 @@ const organizations = [
   },
 ]
 
+const hotspots = [
+  {
+    name: 'Satbayev University',
+    city: 'Алматы',
+    address: 'ул. Сатпаева, кампус Satbayev University',
+    coordinates: [43.2367, 76.9293],
+    status: 'Активная зона eduroam',
+  },
+  {
+    name: 'Университет «Туран»',
+    city: 'Алматы',
+    address: 'ул. Сатпаева, кампус университета',
+    coordinates: [43.2361, 76.9314],
+    status: 'Активная зона eduroam',
+  },
+  {
+    name: 'Университет имени Сулеймана Демиреля',
+    city: 'Каскелен',
+    address: 'кампус SDU University',
+    coordinates: [43.2077, 76.6691],
+    status: 'Активная зона eduroam',
+  },
+  {
+    name: 'International Information Technology University',
+    city: 'Алматы',
+    address: 'ул. Манаса, кампус IITU',
+    coordinates: [43.2354, 76.9093],
+    status: 'Анонсировано подключение',
+  },
+]
+
 const benefits = [
   'Один логин для кампуса и гостевых визитов',
   'Безопасная авторизация через инфраструктуру домашней организации',
@@ -43,13 +77,8 @@ const joinSteps = [
 function EduroamLogo() {
   return (
     <a className="brand" href="#landing" aria-label="eduroam Kazakhstan">
-      <span className="brand-mark" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+      <img className="brand-logo" src={eduroamLogo} alt="eduroam" />
       <span className="brand-text">
-        <strong>eduroam</strong>
         <small>Kazakhstan</small>
       </span>
     </a>
@@ -80,12 +109,163 @@ function Header({ page, setPage }) {
   )
 }
 
+function useRevealOnScroll(page) {
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]')
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      elements.forEach((element) => element.classList.add('is-visible'))
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return
+          }
+
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        })
+      },
+      {
+        rootMargin: '0px 0px -12% 0px',
+        threshold: 0.12,
+      },
+    )
+
+    elements.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [page])
+}
+
+function HotspotMap() {
+  const mapNodeRef = useRef(null)
+  const mapInstanceRef = useRef(null)
+  const markersRef = useRef([])
+  const [selectedHotspot, setSelectedHotspot] = useState(hotspots[0])
+
+  useEffect(() => {
+    if (!mapNodeRef.current || mapInstanceRef.current) {
+      return undefined
+    }
+
+    const map = L.map(mapNodeRef.current, {
+      scrollWheelZoom: false,
+      zoomControl: true,
+    }).setView([43.2305, 76.84], 10)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 19,
+    }).addTo(map)
+
+    const activeIcon = L.divIcon({
+      className: 'hotspot-marker hotspot-marker-active',
+      html: '<span></span>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+    })
+
+    const pendingIcon = L.divIcon({
+      className: 'hotspot-marker hotspot-marker-pending',
+      html: '<span></span>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+    })
+
+    markersRef.current = hotspots.map((hotspot) => {
+      const marker = L.marker(hotspot.coordinates, {
+        icon: hotspot.status.includes('Анонсировано') ? pendingIcon : activeIcon,
+      }).addTo(map)
+
+      marker.bindTooltip(hotspot.name, {
+        direction: 'top',
+        offset: [0, -12],
+      })
+
+      marker.on('click', () => {
+        setSelectedHotspot(hotspot)
+        map.flyTo(hotspot.coordinates, 13, {
+          duration: 0.7,
+        })
+      })
+
+      return marker
+    })
+
+    mapInstanceRef.current = map
+
+    return () => {
+      map.remove()
+      mapInstanceRef.current = null
+      markersRef.current = []
+    }
+  }, [])
+
+  const focusHotspot = (hotspot) => {
+    setSelectedHotspot(hotspot)
+
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.flyTo(hotspot.coordinates, 13, {
+        duration: 0.7,
+      })
+    }
+  }
+
+  return (
+    <section className="map-section">
+      <div className="content-container map-inner">
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">Hotspots</p>
+          <h2>Карта точек eduroam в Казахстане</h2>
+          <p>
+            Локации подключенных организаций и кампусов, где пользователи могут
+            искать сеть eduroam.
+          </p>
+        </div>
+
+        <div className="map-layout">
+          <div className="map-panel" data-reveal>
+            <div className="leaflet-map" ref={mapNodeRef}></div>
+          </div>
+          <aside className="hotspot-panel" data-reveal>
+            <div className="selected-hotspot">
+              <span className="status-pill">{selectedHotspot.status}</span>
+              <h3>{selectedHotspot.name}</h3>
+              <p>{selectedHotspot.address}</p>
+              <strong>{selectedHotspot.city}</strong>
+            </div>
+            <div className="hotspot-list" aria-label="Список точек eduroam">
+              {hotspots.map((hotspot) => (
+                <button
+                  className={
+                    selectedHotspot.name === hotspot.name ? 'active' : ''
+                  }
+                  key={hotspot.name}
+                  type="button"
+                  onClick={() => focusHotspot(hotspot)}
+                >
+                  <span>{hotspot.name}</span>
+                  <small>{hotspot.city}</small>
+                </button>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Landing({ setPage }) {
   return (
     <main>
       <section className="hero-section">
         <div className="content-container hero-inner">
-        <div className="hero-copy">
+        <div className="hero-copy hero-animate">
           <p className="eyebrow">Национальный сервис академического Wi-Fi</p>
           <h1>eduroam для университетов и научных организаций Казахстана</h1>
           <p className="hero-lead">
@@ -106,7 +286,7 @@ function Landing({ setPage }) {
             </button>
           </div>
         </div>
-        <div className="hero-visual" aria-hidden="true">
+        <div className="hero-visual hero-animate" aria-hidden="true">
           <div className="orbit orbit-one"></div>
           <div className="orbit orbit-two"></div>
           <div className="signal-card">
@@ -124,17 +304,17 @@ function Landing({ setPage }) {
 
       <section className="section-band about-band" id="about">
         <div className="content-container">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="eyebrow">Acerca de eduroam</p>
           <h2>Глобальная мобильность для науки и образования</h2>
         </div>
         <div className="about-grid">
-          <p>
+          <p data-reveal>
             eduroam, сокращение от education roaming, это международный сервис
             безопасного доступа к Wi-Fi для академического и исследовательского
             сообщества.
           </p>
-          <p>
+          <p data-reveal>
             В Казахстане национальным оператором и координатором сервиса
             является Ассоциация пользователей научно-образовательной
             компьютерной сети KazRENA.
@@ -145,12 +325,12 @@ function Landing({ setPage }) {
 
       <section className="section-band" id="connect">
         <div className="content-container">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="eyebrow">Soy un usuario</p>
           <h2>Как подключиться пользователю</h2>
         </div>
         <div className="cards-grid">
-          <article>
+          <article data-reveal>
             <span className="step">01</span>
             <h3>Проверьте свою организацию</h3>
             <p>
@@ -159,7 +339,7 @@ function Landing({ setPage }) {
               организации.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <span className="step">02</span>
             <h3>Выберите сеть eduroam</h3>
             <p>
@@ -167,7 +347,7 @@ function Landing({ setPage }) {
               корпоративного логина и пароля.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <span className="step">03</span>
             <h3>Пользуйтесь в поездках</h3>
             <p>
@@ -181,7 +361,7 @@ function Landing({ setPage }) {
 
       <section className="split-section">
         <div className="content-container split-inner">
-        <div>
+        <div data-reveal>
           <p className="eyebrow">Quiero unirme</p>
           <h2>Для организаций</h2>
           <p>
@@ -199,7 +379,9 @@ function Landing({ setPage }) {
         </div>
         <ul className="benefit-list">
           {benefits.map((benefit) => (
-            <li key={benefit}>{benefit}</li>
+            <li data-reveal key={benefit}>
+              {benefit}
+            </li>
           ))}
         </ul>
         </div>
@@ -217,7 +399,7 @@ function Organizations() {
   return (
     <main>
       <section className="page-hero">
-        <div className="content-container">
+        <div className="content-container hero-animate">
         <p className="eyebrow">Организации</p>
         <h1>Участники eduroam в Казахстане</h1>
         <p>
@@ -230,28 +412,30 @@ function Organizations() {
 
       <section className="stats-row" aria-label="Сводка по сервису">
         <div className="content-container stats-inner">
-        <div>
+        <div data-reveal>
           <strong>{connectedCount}</strong>
           <span>подключенные организации</span>
         </div>
-        <div>
+        <div data-reveal>
           <strong>100+</strong>
           <span>стран в глобальной сети</span>
         </div>
-        <div>
+        <div data-reveal>
           <strong>KazRENA</strong>
           <span>национальный оператор</span>
         </div>
         </div>
       </section>
 
+      <HotspotMap />
+
       <section className="organization-list">
         <div className="content-container">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <p className="eyebrow">Directorio</p>
           <h2>Список организаций</h2>
         </div>
-        <div className="table-shell">
+        <div className="table-shell" data-reveal>
           <table>
             <thead>
               <tr>
@@ -280,7 +464,7 @@ function Organizations() {
 
       <section className="split-section join-section">
         <div className="content-container split-inner">
-        <div>
+        <div data-reveal>
           <p className="eyebrow">Proceso</p>
           <h2>Как присоединиться</h2>
           <p>
@@ -291,7 +475,9 @@ function Organizations() {
         </div>
         <ol className="join-steps">
           {joinSteps.map((step) => (
-            <li key={step}>{step}</li>
+            <li data-reveal key={step}>
+              {step}
+            </li>
           ))}
         </ol>
         </div>
@@ -299,7 +485,7 @@ function Organizations() {
 
       <section className="contact-band">
         <div className="content-container contact-inner">
-        <div>
+        <div data-reveal>
           <p className="eyebrow">Contacto</p>
           <h2>KazRENA</h2>
           <p>
@@ -307,7 +493,7 @@ function Organizations() {
             Казахстана.
           </p>
         </div>
-        <address>
+        <address data-reveal>
           <a href="mailto:sapar@kazrena.kz">sapar@kazrena.kz</a>
           <a href="tel:+77078297477">+7 707 829 74 77</a>
           <span>г. Алматы, ул. Сатпаева, 16-18, офис 719, 721</span>
@@ -318,8 +504,26 @@ function Organizations() {
   )
 }
 
+function scrollPageToTop() {
+  const scrollOptions = { top: 0, left: 0, behavior: 'auto' }
+  const scrollingElement = document.scrollingElement || document.documentElement
+
+  window.scrollTo(scrollOptions)
+  scrollingElement.scrollTo(scrollOptions)
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
+}
+
 function App() {
   const [page, setPage] = useState('landing')
+  useRevealOnScroll(page)
+
+  useLayoutEffect(() => {
+    scrollPageToTop()
+    const frameId = window.requestAnimationFrame(scrollPageToTop)
+
+    return () => window.cancelAnimationFrame(frameId)
+  }, [page])
 
   return (
     <>
