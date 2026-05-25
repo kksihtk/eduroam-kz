@@ -55,6 +55,10 @@
   gap: 8px;
 }
 
+.mobile-language-select {
+  display: none;
+}
+
 .site-nav button,
 .language-switcher button,
 .hero-actions a,
@@ -876,9 +880,13 @@ address span {
   .site-header,
   .site-footer {
     align-items: flex-start;
-    flex-direction: column;
     gap: 16px;
     padding: 20px;
+  }
+
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .site-nav {
@@ -888,6 +896,7 @@ address span {
   .header-controls {
     align-items: stretch;
     flex-direction: column;
+    grid-column: 1 / -1;
     gap: 12px;
     width: 100%;
   }
@@ -897,13 +906,31 @@ address span {
   }
 
   .language-switcher {
-    border-left: 0;
-    padding-left: 0;
-    width: 100%;
+    display: none;
   }
 
-  .language-switcher button {
-    flex: 1;
+  .mobile-language-select {
+    align-self: center;
+    appearance: none;
+    background:
+      linear-gradient(45deg, transparent 50%, currentColor 50%) right 12px
+        center / 6px 6px no-repeat,
+      linear-gradient(135deg, currentColor 50%, transparent 50%) right 7px
+        center / 6px 6px no-repeat,
+      var(--soft-blue);
+    border: 1px solid rgba(12, 103, 178, 0.16);
+    border-radius: 8px;
+    color: var(--blue);
+    display: block;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 900;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    min-height: 40px;
+    padding: 8px 28px 8px 12px;
+    text-transform: uppercase;
   }
 
   .hero-section,

@@ -830,6 +830,18 @@ function Header({ lang, page, onLanguageChange, onNavigate, t }) {
   return (
     <header className="site-header">
       <EduroamLogo onNavigate={onNavigate} />
+      <select
+        className="mobile-language-select"
+        aria-label={t.aria.language}
+        value={lang}
+        onChange={(event) => onLanguageChange(event.target.value)}
+      >
+        {VALID_LANGS.map((item) => (
+          <option key={item} value={item}>
+            {item.toUpperCase()}
+          </option>
+        ))}
+      </select>
       <div className="header-controls">
         <nav className="site-nav" aria-label={t.aria.mainNav}>
           <button
