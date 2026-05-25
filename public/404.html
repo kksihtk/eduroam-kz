@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eduroam Kazakhstan | KazRENA</title>
+    <script>
+      ;(() => {
+        const segments = window.location.pathname.split('/').filter(Boolean)
+        const languageIndex = segments.findIndex((segment) =>
+          ['kz', 'ru', 'en'].includes(segment),
+        )
+        const basePath =
+          languageIndex > 0 ? `/${segments.slice(0, languageIndex).join('/')}/` : '/'
+
+        sessionStorage.setItem(
+          'spa-redirect-path',
+          `${window.location.pathname}${window.location.search}${window.location.hash}`,
+        )
+        window.location.replace(basePath)
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>

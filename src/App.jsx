@@ -460,9 +460,31 @@ function buildPath(lang, page) {
 
 function getRouteState() {
   const segments = window.location.pathname.split('/').filter(Boolean)
-  const lang = VALID_LANGS.includes(segments[0]) ? segments[0] : DEFAULT_LANG
-  const page = segments[1] === 'organizations' ? 'organizations' : 'landing'
-  return { lang, page }
+  const langIndex = segments.findIndex((segment) => VALID_LANGS.includes(segment))
+  const basePath =
+    langIndex > 0 ? `/${segments.slice(0, langIndex).join('/')}` : ''
+  const lang = langIndex >= 0 ? segments[langIndex] : DEFAULT_LANG
+  const page =
+    langIndex >= 0 && segments[langIndex + 1] === 'organizations'
+      ? 'organizations'
+      : 'landing'
+
+  return { basePath, lang, page }
+}
+
+function restoreGithubPagesRoute() {
+  const redirectPath = sessionStorage.getItem('spa-redirect-path')
+
+  if (!redirectPath) {
+    return
+  }
+
+  sessionStorage.removeItem('spa-redirect-path')
+  window.history.replaceState(null, '', redirectPath)
+}
+
+function buildRoutePath(route) {
+  return `${route.basePath}${buildPath(route.lang, route.page)}`
 }
 
 function EduroamLogo({ onNavigate }) {
@@ -893,6 +915,7 @@ function scrollPageToTop() {
 }
 
 function App() {
+  restoreGithubPagesRoute()
   const [route, setRoute] = useState(getRouteState)
   const t = CONTENT[route.lang]
 
@@ -900,7 +923,7 @@ function App() {
 
   useEffect(() => {
     const currentRoute = getRouteState()
-    const expectedPath = buildPath(currentRoute.lang, currentRoute.page)
+    const expectedPath = buildRoutePath(currentRoute)
 
     if (window.location.pathname !== expectedPath) {
       window.history.replaceState(null, '', expectedPath)
@@ -923,7 +946,7 @@ function App() {
   }, [route.page, route.lang])
 
   const updateRoute = (nextRoute, replace = false) => {
-    const path = buildPath(nextRoute.lang, nextRoute.page)
+    const path = buildRoutePath(nextRoute)
     const method = replace ? 'replaceState' : 'pushState'
 
     window.history[method](null, '', path)
