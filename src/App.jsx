@@ -927,10 +927,14 @@ function HotspotMap({ t }) {
       zoomControl: true,
     }).setView([43.2305, 76.84], 10)
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-      maxZoom: 19,
-    }).addTo(map)
+    L.tileLayer(
+      'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+      {
+        attribution:
+          '&copy; OpenStreetMap contributors &copy; CARTO',
+        maxZoom: 19,
+      },
+    ).addTo(map)
 
     mapInstanceRef.current = map
 
