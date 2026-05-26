@@ -225,7 +225,7 @@ const CONTENT = {
         name: 'Satpaev University',
         city: 'Алматы',
         address: 'ул. Сатпаева, 22',
-        coordinates: [43.2360197, 76.9202422],
+        coordinates: [43.23659, 76.929995],
         status: 'activeHotspot',
       },
       {
@@ -241,7 +241,7 @@ const CONTENT = {
         name: 'Turan - Astana University',
         city: 'Астана',
         address: 'ул. Дүкенұлы, 29',
-        coordinates: [51.1815679, 71.43244],
+        coordinates: [51.181815, 71.430555],
         status: 'activeHotspot',
       },
       {
@@ -249,7 +249,7 @@ const CONTENT = {
         name: 'Coventry University Kazakhstan',
         city: 'Астана',
         address: 'Коргалжынское шоссе, 13А',
-        coordinates: [51.1489885, 71.3554127],
+        coordinates: [51.147914, 71.38504],
         status: 'activeHotspot',
       },
       {
@@ -257,7 +257,7 @@ const CONTENT = {
         name: 'Kh. Dosmukhamedov Atyrau University',
         city: 'Атырау',
         address: 'Студенческий проспект, 1',
-        coordinates: [47.1012483, 51.9136422],
+        coordinates: [47.098425, 51.912139],
         status: 'activeHotspot',
       },
       {
@@ -265,7 +265,7 @@ const CONTENT = {
         name: 'International Information Technologies University',
         city: 'Алматы',
         address: 'ул. Манаса, 34/1',
-        coordinates: [43.23517, 76.90978],
+        coordinates: [43.235386, 76.909875],
         status: 'activeHotspot',
       },
       {
@@ -273,7 +273,7 @@ const CONTENT = {
         name: 'K.Zhubanov Aktobe regional University',
         city: 'Актобе',
         address: 'пр. Алии Молдагуловой, 34',
-        coordinates: [50.2890898, 57.1536497],
+        coordinates: [50.289325, 57.15262],
         status: 'activeHotspot',
       },
       {
@@ -281,7 +281,7 @@ const CONTENT = {
         name: 'Egyptian University of Islamic Culture Nur-Mubarak',
         city: 'Алматы',
         address: 'пр. Аль-Фараби, 73',
-        coordinates: [43.2123327, 76.9178057],
+        coordinates: [43.212068, 76.917765],
         status: 'activeHotspot',
       },
       {
@@ -289,7 +289,7 @@ const CONTENT = {
         name: 'International Engineering and Technological University',
         city: 'Алматы',
         address: 'пр. Аль-Фараби, 93Г/5',
-        coordinates: [43.2283977, 76.9554344],
+        coordinates: [43.212653, 76.911222],
         status: 'activeHotspot',
       },
       {
@@ -297,7 +297,7 @@ const CONTENT = {
         name: 'Suleyman Demirel University',
         city: 'Каскелен',
         address: 'пр. Абылай хана, 1/1',
-        coordinates: [43.2075546, 76.6696884],
+        coordinates: [43.207123, 76.669268],
         status: 'activeHotspot',
       },
     ],
@@ -1267,8 +1267,8 @@ function Organizations({ t }) {
             <p>{t.organizationsPage.contactText}</p>
           </div>
           <address data-reveal>
-            <a href="mailto:sapar@kazrena.kz">sapar@kazrena.kz</a>
-            <a href="tel:+77078297477">+7 707 829 74 77</a>
+            <a href="mailto:info@kazrena.kz">info@kazrena.kz</a>
+            <a href="tel:+77">+7 707 829 74 77</a>
             <span>{t.organizationsPage.address}</span>
           </address>
         </div>
