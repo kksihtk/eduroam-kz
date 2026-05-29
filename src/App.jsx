@@ -86,7 +86,7 @@ const CONTENT = {
       aboutTitle: 'Глобальная мобильность для науки и образования',
       aboutText: [
         'eduroam, сокращение от education roaming, это международный сервис безопасного доступа к Wi-Fi для академического и исследовательского сообщества.',
-        'В Казахстане национальным оператором и координатором сервиса является Ассоциация пользователей научно-образовательной компьютерной сети KazRENA.',
+        'В Казахстане национальным оператором и координатором сервиса является Ассоциация пользователей научно-образовательной компьютерной сети COMPANY NAME.',
       ],
       connectEyebrow: 'Soy un usuario',
       connectTitle: 'Как подключиться пользователю',
@@ -132,9 +132,9 @@ const CONTENT = {
       table: ['Организация', 'Город', 'Статус', 'Пользователи'],
       processEyebrow: 'Proceso',
       processTitle: 'Как присоединиться',
-      processText: 'Подключение проходит через KazRENA. Организация сохраняет управление своими учетными записями, а eduroam использует федеративную схему проверки пользователя.',
+      processText: 'Подключение проходит через COMPANY NAME. Организация сохраняет управление своими учетными записями, а eduroam использует федеративную схему проверки пользователя.',
       joinSteps: [
-        'Организация обращается к национальному оператору KazRENA.',
+        'Организация обращается к национальному оператору COMPANY NAME.',
         'Техническая команда согласует RADIUS-инфраструктуру и параметры безопасности.',
         'После подключения пользователи получают доступ к eduroam в Казахстане и за рубежом.',
       ],
@@ -301,7 +301,7 @@ const CONTENT = {
         status: 'activeHotspot',
       },
     ],
-    footer: 'eduroam Kazakhstan, координация сервиса KazRENA',
+    footer: 'eduroam Kazakhstan, координация сервиса COMPANY NAME',
   },
   kz: {
     nav: { home: 'Басты бет', organizations: 'Ұйымдар' },
@@ -322,7 +322,7 @@ const CONTENT = {
       aboutTitle: 'Ғылым мен білімге арналған жаһандық мобильділік',
       aboutText: [
         'eduroam, education roaming сөзінен қысқартылған, академиялық және зерттеу қауымдастығына арналған қауіпсіз Wi-Fi қолжетімділігінің халықаралық сервисі.',
-        'Қазақстанда сервистің ұлттық операторы және үйлестірушісі KazRENA ғылыми-білім беру компьютерлік желісін пайдаланушылар қауымдастығы болып табылады.',
+        'Қазақстанда сервистің ұлттық операторы және үйлестірушісі COMPANY NAME ғылыми-білім беру компьютерлік желісін пайдаланушылар қауымдастығы болып табылады.',
       ],
       connectEyebrow: 'Пайдаланушыға',
       connectTitle: 'Пайдаланушы қалай қосылады',
@@ -368,9 +368,9 @@ const CONTENT = {
       table: ['Ұйым', 'Қала', 'Мәртебе', 'Пайдаланушылар'],
       processEyebrow: 'Процесс',
       processTitle: 'Қалай қосылуға болады',
-      processText: 'Қосылу KazRENA арқылы өтеді. Ұйым өз есептік жазбаларын басқаруды сақтайды, ал eduroam пайдаланушыны тексерудің федеративтік схемасын қолданады.',
+      processText: 'Қосылу COMPANY NAME арқылы өтеді. Ұйым өз есептік жазбаларын басқаруды сақтайды, ал eduroam пайдаланушыны тексерудің федеративтік схемасын қолданады.',
       joinSteps: [
-        'Ұйым KazRENA ұлттық операторына жүгінеді.',
+        'Ұйым COMPANY NAME ұлттық операторына жүгінеді.',
         'Техникалық команда RADIUS инфрақұрылымын және қауіпсіздік параметрлерін келіседі.',
         'Қосылғаннан кейін пайдаланушылар Қазақстанда және шетелде eduroam-ға қол жеткізеді.',
       ],
@@ -537,7 +537,7 @@ const CONTENT = {
         status: 'activeHotspot',
       },
     ],
-    footer: 'eduroam Kazakhstan, KazRENA сервисінің үйлестіруі',
+    footer: 'eduroam Kazakhstan, COMPANY NAME сервисінің үйлестіруі',
   },
   en: {
     nav: { home: 'Home', organizations: 'Organizations' },
@@ -558,7 +558,7 @@ const CONTENT = {
       aboutTitle: 'Global mobility for research and education',
       aboutText: [
         'eduroam, short for education roaming, is an international secure Wi-Fi access service for the academic and research community.',
-        'In Kazakhstan, the national operator and coordinator of the service is KazRENA, the Association of Users of the Scientific and Educational Computer Network.',
+        'In Kazakhstan, the national operator and coordinator of the service is COMPANY NAME, the Association of Users of the Scientific and Educational Computer Network.',
       ],
       connectEyebrow: 'For users',
       connectTitle: 'How users connect',
@@ -604,9 +604,9 @@ const CONTENT = {
       table: ['Organization', 'City', 'Status', 'Users'],
       processEyebrow: 'Process',
       processTitle: 'How to join',
-      processText: 'Connection is coordinated through KazRENA. The organization keeps control of its user accounts, while eduroam uses a federated authentication model.',
+      processText: 'Connection is coordinated through COMPANY NAME. The organization keeps control of its user accounts, while eduroam uses a federated authentication model.',
       joinSteps: [
-        'The organization contacts the national operator KazRENA.',
+        'The organization contacts the national operator COMPANY NAME.',
         'The technical team agrees on RADIUS infrastructure and security parameters.',
         'After connection, users receive access to eduroam in Kazakhstan and abroad.',
       ],
@@ -773,7 +773,7 @@ const CONTENT = {
         status: 'activeHotspot',
       },
     ],
-    footer: 'eduroam Kazakhstan, service coordination by KazRENA',
+    footer: 'eduroam Kazakhstan, service coordination by COMPANY NAME',
   },
 }
 
@@ -1134,7 +1134,7 @@ function Landing({ onNavigate, t }) {
             </div>
             <div className="map-card">
               <span>{t.landing.country}</span>
-              <strong>KazRENA</strong>
+              <strong>COMPANY NAME</strong>
             </div>
           </div>
         </div>
@@ -1228,7 +1228,7 @@ function Organizations({ t }) {
             <span>{t.organizationsPage.statsCountries}</span>
           </div>
           <div data-reveal>
-            <strong>KazRENA</strong>
+            <strong>COMPANY NAME</strong>
             <span>{t.organizationsPage.statsOperator}</span>
           </div>
         </div>
@@ -1267,7 +1267,7 @@ function Organizations({ t }) {
         <div className="content-container contact-inner">
           <div data-reveal>
             <p className="eyebrow">{t.organizationsPage.contactEyebrow}</p>
-            <h2>KazRENA</h2>
+            <h2>COMPANY NAME</h2>
             <p>{t.organizationsPage.contactText}</p>
           </div>
           <address data-reveal>
