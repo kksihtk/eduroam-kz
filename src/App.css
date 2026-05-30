@@ -946,7 +946,9 @@ address span {
 
 .site-footer p {
   color: var(--muted);
+  line-height: 1.5;
   margin: 0;
+  text-align: right;
 }
 
 .footer-copy {
@@ -963,7 +965,9 @@ address span {
   cursor: pointer;
   font: inherit;
   font-weight: 800;
+  line-height: 1.35;
   padding: 0;
+  text-align: right;
 }
 
 .footer-copy button:hover {
@@ -976,6 +980,12 @@ address span {
     align-items: flex-start;
     gap: 16px;
     padding: 20px;
+  }
+
+  .site-footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: start;
   }
 
   .site-header {
@@ -1088,6 +1098,17 @@ address span {
   .footer-copy {
     align-items: flex-start;
     justify-items: start;
+    width: 100%;
+  }
+
+  .site-footer p,
+  .footer-copy button {
+    text-align: left;
+  }
+
+  .footer-copy button {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 }
 
