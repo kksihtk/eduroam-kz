@@ -21,6 +21,8 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the software.
 
+The license text must remain available on the /legal page or in a website section that serves an equivalent function. Removing, hiding, distorting, or modifying the license text, the copyright notice, or the author attribution is not permitted.
+
 The software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability arising from the software or the use of the software.`
 
 const ORGANIZATION_LINKS = {
