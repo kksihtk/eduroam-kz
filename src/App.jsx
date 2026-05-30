@@ -12,6 +12,16 @@ const LANGUAGES = {
 
 const DEFAULT_LANG = 'ru'
 const VALID_LANGS = Object.keys(LANGUAGES)
+const LEGAL_PAGE = 'legal'
+const ORGANIZATIONS_PAGE = 'organizations'
+
+const LICENSE_TEXT = `Copyright (c) 2026 KKSIHTKK DEV_SHOP / Kudbidinov Alijon.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense and sell copies of the software, and to permit persons to whom the software is furnished to do so.
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the software.
+
+The software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability arising from the software or the use of the software.`
 
 const ORGANIZATION_LINKS = {
   satbayev: {
@@ -68,12 +78,21 @@ const ORGANIZATION_LINKS = {
 
 const CONTENT = {
   ru: {
-    nav: { home: 'Главная', organizations: 'Организации' },
+    nav: { home: 'Главная', organizations: 'Организации', legal: 'Правовая информация' },
     aria: {
       mainNav: 'Основная навигация',
       language: 'Выбор языка',
       hotspotList: 'Список точек eduroam',
       stats: 'Сводка по сервису',
+    },
+    legalPage: {
+      eyebrow: 'Правовая информация',
+      title: 'Лицензия',
+      lead: 'Лицензия программного обеспечения и уведомление об авторских правах.',
+      developerSiteLabel: 'Сайт разработчика',
+      developerSiteText: 'KKSIHTKK DEV_SHOP',
+      licenseSiteLabel: 'Источник текста лицензии',
+      licenseSiteText: 'Страница лицензии на сайте разработчика',
     },
     landing: {
       eyebrow: 'Национальный сервис академического Wi-Fi',
@@ -86,7 +105,7 @@ const CONTENT = {
       aboutTitle: 'Глобальная мобильность для науки и образования',
       aboutText: [
         'eduroam, сокращение от education roaming, это международный сервис безопасного доступа к Wi-Fi для академического и исследовательского сообщества.',
-        'В Казахстане национальным оператором и координатором сервиса является Ассоциация пользователей научно-образовательной компьютерной сети COMPANY NAME.',
+        'В Казахстане национальным оператором и координатором сервиса является Ассоциация пользователей научно-образовательной компьютерной сети KazRENA.',
       ],
       connectEyebrow: 'Soy un usuario',
       connectTitle: 'Как подключиться пользователю',
@@ -132,9 +151,9 @@ const CONTENT = {
       table: ['Организация', 'Город', 'Статус', 'Пользователи'],
       processEyebrow: 'Proceso',
       processTitle: 'Как присоединиться',
-      processText: 'Подключение проходит через COMPANY NAME. Организация сохраняет управление своими учетными записями, а eduroam использует федеративную схему проверки пользователя.',
+      processText: 'Подключение проходит через KazRENA. Организация сохраняет управление своими учетными записями, а eduroam использует федеративную схему проверки пользователя.',
       joinSteps: [
-        'Организация обращается к национальному оператору COMPANY NAME.',
+        'Организация обращается к национальному оператору KazRENA.',
         'Техническая команда согласует RADIUS-инфраструктуру и параметры безопасности.',
         'После подключения пользователи получают доступ к eduroam в Казахстане и за рубежом.',
       ],
@@ -301,15 +320,24 @@ const CONTENT = {
         status: 'activeHotspot',
       },
     ],
-    footer: 'eduroam Kazakhstan, координация сервиса COMPANY NAME',
+    footer: 'eduroam Kazakhstan, координация сервиса KazRENA',
   },
   kz: {
-    nav: { home: 'Басты бет', organizations: 'Ұйымдар' },
+    nav: { home: 'Басты бет', organizations: 'Ұйымдар', legal: 'Құқықтық ақпарат' },
     aria: {
       mainNav: 'Негізгі навигация',
       language: 'Тілді таңдау',
       hotspotList: 'eduroam нүктелерінің тізімі',
       stats: 'Сервис бойынша қысқаша ақпарат',
+    },
+    legalPage: {
+      eyebrow: 'Құқықтық ақпарат',
+      title: 'Лицензия',
+      lead: 'Бағдарламалық жасақтама лицензиясы және авторлық құқық туралы ескерту.',
+      developerSiteLabel: 'Әзірлеушінің сайты',
+      developerSiteText: 'KKSIHTKK DEV_SHOP',
+      licenseSiteLabel: 'Лицензия мәтінінің көзі',
+      licenseSiteText: 'Әзірлеуші сайтындағы лицензия беті',
     },
     landing: {
       eyebrow: 'Академиялық Wi-Fi ұлттық сервисі',
@@ -322,7 +350,7 @@ const CONTENT = {
       aboutTitle: 'Ғылым мен білімге арналған жаһандық мобильділік',
       aboutText: [
         'eduroam, education roaming сөзінен қысқартылған, академиялық және зерттеу қауымдастығына арналған қауіпсіз Wi-Fi қолжетімділігінің халықаралық сервисі.',
-        'Қазақстанда сервистің ұлттық операторы және үйлестірушісі COMPANY NAME ғылыми-білім беру компьютерлік желісін пайдаланушылар қауымдастығы болып табылады.',
+        'Қазақстанда сервистің ұлттық операторы және үйлестірушісі KazRENA ғылыми-білім беру компьютерлік желісін пайдаланушылар қауымдастығы болып табылады.',
       ],
       connectEyebrow: 'Пайдаланушыға',
       connectTitle: 'Пайдаланушы қалай қосылады',
@@ -368,9 +396,9 @@ const CONTENT = {
       table: ['Ұйым', 'Қала', 'Мәртебе', 'Пайдаланушылар'],
       processEyebrow: 'Процесс',
       processTitle: 'Қалай қосылуға болады',
-      processText: 'Қосылу COMPANY NAME арқылы өтеді. Ұйым өз есептік жазбаларын басқаруды сақтайды, ал eduroam пайдаланушыны тексерудің федеративтік схемасын қолданады.',
+      processText: 'Қосылу KazRENA арқылы өтеді. Ұйым өз есептік жазбаларын басқаруды сақтайды, ал eduroam пайдаланушыны тексерудің федеративтік схемасын қолданады.',
       joinSteps: [
-        'Ұйым COMPANY NAME ұлттық операторына жүгінеді.',
+        'Ұйым KazRENA ұлттық операторына жүгінеді.',
         'Техникалық команда RADIUS инфрақұрылымын және қауіпсіздік параметрлерін келіседі.',
         'Қосылғаннан кейін пайдаланушылар Қазақстанда және шетелде eduroam-ға қол жеткізеді.',
       ],
@@ -537,15 +565,24 @@ const CONTENT = {
         status: 'activeHotspot',
       },
     ],
-    footer: 'eduroam Kazakhstan, COMPANY NAME сервисінің үйлестіруі',
+    footer: 'eduroam Kazakhstan, KazRENA сервисінің үйлестіруі',
   },
   en: {
-    nav: { home: 'Home', organizations: 'Organizations' },
+    nav: { home: 'Home', organizations: 'Organizations', legal: 'Legal' },
     aria: {
       mainNav: 'Main navigation',
       language: 'Language selector',
       hotspotList: 'eduroam hotspot list',
       stats: 'Service summary',
+    },
+    legalPage: {
+      eyebrow: 'Legal',
+      title: 'License',
+      lead: 'Software license and copyright notice.',
+      developerSiteLabel: 'Developer website',
+      developerSiteText: 'KKSIHTKK DEV_SHOP',
+      licenseSiteLabel: 'License text source',
+      licenseSiteText: 'License page on the developer website',
     },
     landing: {
       eyebrow: 'National academic Wi-Fi service',
@@ -558,7 +595,7 @@ const CONTENT = {
       aboutTitle: 'Global mobility for research and education',
       aboutText: [
         'eduroam, short for education roaming, is an international secure Wi-Fi access service for the academic and research community.',
-        'In Kazakhstan, the national operator and coordinator of the service is COMPANY NAME, the Association of Users of the Scientific and Educational Computer Network.',
+        'In Kazakhstan, the national operator and coordinator of the service is KazRENA, the Association of Users of the Scientific and Educational Computer Network.',
       ],
       connectEyebrow: 'For users',
       connectTitle: 'How users connect',
@@ -604,9 +641,9 @@ const CONTENT = {
       table: ['Organization', 'City', 'Status', 'Users'],
       processEyebrow: 'Process',
       processTitle: 'How to join',
-      processText: 'Connection is coordinated through COMPANY NAME. The organization keeps control of its user accounts, while eduroam uses a federated authentication model.',
+      processText: 'Connection is coordinated through KazRENA. The organization keeps control of its user accounts, while eduroam uses a federated authentication model.',
       joinSteps: [
-        'The organization contacts the national operator COMPANY NAME.',
+        'The organization contacts the national operator KazRENA.',
         'The technical team agrees on RADIUS infrastructure and security parameters.',
         'After connection, users receive access to eduroam in Kazakhstan and abroad.',
       ],
@@ -773,12 +810,19 @@ const CONTENT = {
         status: 'activeHotspot',
       },
     ],
-    footer: 'eduroam Kazakhstan, service coordination by COMPANY NAME',
+    footer: 'eduroam Kazakhstan, service coordination by KazRENA',
   },
 }
 
 function buildPath(lang, page) {
-  return `/${lang}/${page === 'organizations' ? 'organizations/' : ''}`
+  const pagePath =
+    page === ORGANIZATIONS_PAGE
+      ? 'organizations/'
+      : page === LEGAL_PAGE
+        ? 'legal/'
+        : ''
+
+  return `/${lang}/${pagePath}`
 }
 
 function getRouteState() {
@@ -787,9 +831,10 @@ function getRouteState() {
   const basePath =
     langIndex > 0 ? `/${segments.slice(0, langIndex).join('/')}` : ''
   const lang = langIndex >= 0 ? segments[langIndex] : DEFAULT_LANG
+  const pageSegment = langIndex >= 0 ? segments[langIndex + 1] : ''
   const page =
-    langIndex >= 0 && segments[langIndex + 1] === 'organizations'
-      ? 'organizations'
+    pageSegment === ORGANIZATIONS_PAGE || pageSegment === LEGAL_PAGE
+      ? pageSegment
       : 'landing'
 
   return { basePath, lang, page }
@@ -852,9 +897,9 @@ function Header({ lang, page, onLanguageChange, onNavigate, t }) {
             {t.nav.home}
           </button>
           <button
-            className={page === 'organizations' ? 'active' : ''}
+            className={page === ORGANIZATIONS_PAGE ? 'active' : ''}
             type="button"
-            onClick={() => onNavigate('organizations')}
+            onClick={() => onNavigate(ORGANIZATIONS_PAGE)}
           >
             {t.nav.organizations}
           </button>
@@ -1118,7 +1163,7 @@ function Landing({ onNavigate, t }) {
               <button
                 className="secondary-action"
                 type="button"
-                onClick={() => onNavigate('organizations')}
+                onClick={() => onNavigate(ORGANIZATIONS_PAGE)}
               >
                 {t.landing.orgCta}
               </button>
@@ -1134,7 +1179,7 @@ function Landing({ onNavigate, t }) {
             </div>
             <div className="map-card">
               <span>{t.landing.country}</span>
-              <strong>COMPANY NAME</strong>
+              <strong>KazRENA</strong>
             </div>
           </div>
         </div>
@@ -1183,7 +1228,7 @@ function Landing({ onNavigate, t }) {
             <button
               className="text-action"
               type="button"
-              onClick={() => onNavigate('organizations')}
+              onClick={() => onNavigate(ORGANIZATIONS_PAGE)}
             >
               {t.landing.joinCta}
             </button>
@@ -1228,7 +1273,7 @@ function Organizations({ t }) {
             <span>{t.organizationsPage.statsCountries}</span>
           </div>
           <div data-reveal>
-            <strong>COMPANY NAME</strong>
+            <strong>KazRENA</strong>
             <span>{t.organizationsPage.statsOperator}</span>
           </div>
         </div>
@@ -1267,7 +1312,7 @@ function Organizations({ t }) {
         <div className="content-container contact-inner">
           <div data-reveal>
             <p className="eyebrow">{t.organizationsPage.contactEyebrow}</p>
-            <h2>COMPANY NAME</h2>
+            <h2>KazRENA</h2>
             <p>{t.organizationsPage.contactText}</p>
           </div>
           <address data-reveal>
@@ -1275,6 +1320,48 @@ function Organizations({ t }) {
             <a href="tel:+77">+7 707 829 74 77</a>
             <span>{t.organizationsPage.address}</span>
           </address>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function Legal({ t }) {
+  return (
+    <main>
+      <section className="page-hero legal-hero">
+        <div className="content-container hero-animate">
+          <p className="eyebrow">{t.legalPage.eyebrow}</p>
+          <h1>{t.legalPage.title}</h1>
+          <p>{t.legalPage.lead}</p>
+        </div>
+      </section>
+
+      <section className="legal-section">
+        <div className="content-container">
+          <div className="legal-layout">
+            <aside className="legal-links" data-reveal>
+              <a
+                href="https://shop.kksihtkk.dev"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span>{t.legalPage.developerSiteLabel}</span>
+                <strong>{t.legalPage.developerSiteText}</strong>
+              </a>
+              <a
+                href="https://shop.kksihtkk.dev/legal#license"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span>{t.legalPage.licenseSiteLabel}</span>
+                <strong>{t.legalPage.licenseSiteText}</strong>
+              </a>
+            </aside>
+            <article className="legal-document" data-reveal>
+              <pre id="license">{LICENSE_TEXT}</pre>
+            </article>
+          </div>
         </div>
       </section>
     </main>
@@ -1347,14 +1434,17 @@ function App() {
         onNavigate={handleNavigate}
         t={t}
       />
-      {route.page === 'landing' ? (
-        <Landing onNavigate={handleNavigate} t={t} />
-      ) : (
-        <Organizations t={t} />
-      )}
+      {route.page === LEGAL_PAGE && <Legal t={t} />}
+      {route.page === ORGANIZATIONS_PAGE && <Organizations t={t} />}
+      {route.page === 'landing' && <Landing onNavigate={handleNavigate} t={t} />}
       <footer className="site-footer">
         <EduroamLogo onNavigate={handleNavigate} />
-        <p>{t.footer}</p>
+        <div className="footer-copy">
+          <p>{t.footer}</p>
+          <button type="button" onClick={() => handleNavigate(LEGAL_PAGE)}>
+            {t.nav.legal}
+          </button>
+        </div>
       </footer>
     </>
   )

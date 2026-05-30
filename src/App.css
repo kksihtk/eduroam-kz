@@ -765,6 +765,79 @@ td:first-child {
   background: var(--soft-green);
 }
 
+.legal-hero {
+  background:
+    linear-gradient(135deg, rgba(7, 54, 100, 0.94), rgba(12, 103, 178, 0.88)),
+    url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=80');
+  background-position: center;
+  background-size: cover;
+}
+
+.legal-section {
+  background: #f8fbfe;
+  padding: 76px 56px;
+}
+
+.legal-layout {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 320px minmax(0, 1fr);
+}
+
+.legal-links {
+  display: grid;
+  gap: 14px;
+}
+
+.legal-links a {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink);
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.legal-links a:hover {
+  border-color: rgba(12, 103, 178, 0.32);
+  box-shadow: 0 18px 46px rgba(12, 103, 178, 0.12);
+  transform: translateY(-3px);
+}
+
+.legal-links span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.legal-links strong {
+  color: var(--blue);
+  line-height: 1.35;
+}
+
+.legal-document {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 34px;
+}
+
+.legal-document pre {
+  color: var(--ink);
+  font: 500 17px/1.72 ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono',
+    monospace;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
 .contact-inner {
   align-items: center;
   display: grid;
@@ -876,6 +949,27 @@ address span {
   margin: 0;
 }
 
+.footer-copy {
+  align-items: flex-end;
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+}
+
+.footer-copy button {
+  background: transparent;
+  border: 0;
+  color: var(--blue);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0;
+}
+
+.footer-copy button:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 920px) {
   .site-header,
   .site-footer {
@@ -939,6 +1033,7 @@ address span {
   .split-section,
   .organization-list,
   .map-section,
+  .legal-section,
   .contact-band {
     padding-left: 22px;
     padding-right: 22px;
@@ -949,6 +1044,7 @@ address span {
   .about-grid,
   .cards-grid,
   .contact-inner,
+  .legal-layout,
   .map-layout,
   .stats-inner {
     grid-template-columns: 1fr;
@@ -987,6 +1083,11 @@ address span {
 
   .stats-inner > div:last-child {
     border-bottom: 0;
+  }
+
+  .footer-copy {
+    align-items: flex-start;
+    justify-items: start;
   }
 }
 
