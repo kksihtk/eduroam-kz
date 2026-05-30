@@ -1,16 +1,80 @@
-# React + Vite
+# eduroam Kazakhstan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite website for the KazRENA eduroam Kazakhstan service.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 20 or newer
+- npm
+- Nginx for production hosting
 
-## React Compiler
+## Local Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+By default, Vite starts the local server at `http://localhost:5173/`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Production Build
+
+```bash
+npm install
+npm run build
+```
+
+The generated static files will be placed in `dist/`.
+
+## Deploying With Nginx
+
+1. Build the project:
+
+```bash
+npm run build
+```
+
+2. Copy the contents of `dist/` to your web root, for example:
+
+```bash
+sudo mkdir -p /var/www/eduroam-kz
+sudo cp -r dist/* /var/www/eduroam-kz/
+```
+
+3. Create an Nginx server block:
+
+```nginx
+server {
+    listen 80;
+    server_name example.com www.example.com;
+
+    root /var/www/eduroam-kz;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+}
+```
+
+4. Enable the site and reload Nginx:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/eduroam-kz /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+The `try_files $uri $uri/ /index.html;` rule is required because this is a single-page application. It allows routes such as `/ru/legal/`, `/kz/organizations/`, and `/en/` to work after a direct page refresh.
+
+## License
+
+This project is distributed under the license in [LICENSE](LICENSE).
+
+The license text must remain available on the `/legal` page or in a website section that serves an equivalent function. The developer website is `https://shop.kksihtkk.dev`, and the canonical license page is `https://shop.kksihtkk.dev/legal#license`.
