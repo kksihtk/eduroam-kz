@@ -1102,7 +1102,6 @@ function OrganizationLogoStrip({ t }) {
     <>
       <div
         className={`organization-ribbon ${isExpanded ? 'expanded' : ''}`}
-        data-reveal
       >
         {t.organizations.map((organization, index) => {
           const link = ORGANIZATION_LINKS[organization.id]
