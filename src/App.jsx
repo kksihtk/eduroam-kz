@@ -15,7 +15,7 @@ const VALID_LANGS = Object.keys(LANGUAGES)
 const LEGAL_PAGE = 'legal'
 const ORGANIZATIONS_PAGE = 'organizations'
 
-const LICENSE_TEXT = `Copyright (c) 2026 KKSIHTKK DEV_SHOP / Kudbidinov Alijon.
+const LICENSE_TEXT = `Copyright (c) 2026 KazRENA.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense and sell copies of the software, and to permit persons to whom the software is furnished to do so.
 
@@ -91,8 +91,8 @@ const CONTENT = {
       eyebrow: 'Правовая информация',
       title: 'Лицензия',
       lead: 'Лицензия программного обеспечения и уведомление об авторских правах.',
-      developerSiteLabel: 'Сайт разработчика',
-      developerSiteText: 'KKSIHTKK DEV_SHOP',
+      developerSiteLabel: 'Сайт компании',
+      developerSiteText: 'KazRENA',
       licenseSiteLabel: 'Источник текста лицензии',
       licenseSiteText: 'Страница лицензии на сайте разработчика',
     },
@@ -103,13 +103,13 @@ const CONTENT = {
       userCta: 'Я пользователь',
       orgCta: 'Моя организация',
       country: 'Казахстан',
-      aboutEyebrow: 'Acerca de eduroam',
+      aboutEyebrow: 'Что такое eduroam',
       aboutTitle: 'Глобальная мобильность для науки и образования',
       aboutText: [
         'eduroam, сокращение от education roaming, это международный сервис безопасного доступа к Wi-Fi для академического и исследовательского сообщества.',
         'В Казахстане национальным оператором и координатором сервиса является Ассоциация пользователей научно-образовательной компьютерной сети KazRENA.',
       ],
-      connectEyebrow: 'Soy un usuario',
+      connectEyebrow: 'Я пользователь',
       connectTitle: 'Как подключиться пользователю',
       cards: [
         {
@@ -128,7 +128,7 @@ const CONTENT = {
           text: 'При визитах в другие кампусы eduroam авторизация проходит через вашу домашнюю организацию без передачи пароля принимающей стороне.',
         },
       ],
-      joinEyebrow: 'Quiero unirme',
+      joinEyebrow: 'Хочу присоединиться',
       joinTitle: 'Для организаций',
       joinText: 'eduroam помогает вузам и научным организациям снизить нагрузку на гостевой Wi-Fi, упростить академическую мобильность и дать пользователям знакомый безопасный доступ в сеть.',
       joinCta: 'Смотреть страницу организаций',
@@ -148,10 +148,10 @@ const CONTENT = {
       mapEyebrow: 'Hotspots',
       mapTitle: 'Карта точек eduroam в Казахстане',
       mapText: 'Локации подключенных организаций и кампусов, где пользователи могут искать сеть eduroam.',
-      directoryEyebrow: 'Directorio',
+      directoryEyebrow: 'Организации',
       directoryTitle: 'Список организаций',
       table: ['Организация', 'Город', 'Статус', 'Пользователи'],
-      processEyebrow: 'Proceso',
+      processEyebrow: 'Присоединение',
       processTitle: 'Как присоединиться',
       processText: 'Подключение проходит через KazRENA. Организация сохраняет управление своими учетными записями, а eduroam использует федеративную схему проверки пользователя.',
       joinSteps: [
@@ -159,7 +159,7 @@ const CONTENT = {
         'Техническая команда согласует RADIUS-инфраструктуру и параметры безопасности.',
         'После подключения пользователи получают доступ к eduroam в Казахстане и за рубежом.',
       ],
-      contactEyebrow: 'Contacto',
+      contactEyebrow: 'Контакты',
       contactText: 'Ассоциация пользователей научно-образовательной компьютерной сети Казахстана.',
       address: 'г. Алматы, ул. Сатпаева, 16-18, офис 719, 721',
     },
@@ -1340,7 +1340,10 @@ function Legal({ t }) {
 
       <section className="legal-section">
         <div className="content-container">
-          <div className="legal-layout">
+          <article className="legal-document" data-reveal>
+              <pre id="license">{LICENSE_TEXT}</pre>
+            </article>
+          {/* <div className="legal-layout">
             <aside className="legal-links" data-reveal>
               <a
                 href="https://shop.kksihtkk.dev"
@@ -1359,10 +1362,7 @@ function Legal({ t }) {
                 <strong>{t.legalPage.licenseSiteText}</strong>
               </a>
             </aside>
-            <article className="legal-document" data-reveal>
-              <pre id="license">{LICENSE_TEXT}</pre>
-            </article>
-          </div>
+          </div> */}
         </div>
       </section>
     </main>
